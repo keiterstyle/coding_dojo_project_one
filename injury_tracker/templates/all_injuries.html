@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js">
+    <title>BJJ Injury Tracker</title>
+</head>
+<body>
+    <div class="container">
+        <div class="float-right">
+            <a href="/logout" class="btn btn-outline-primary btn-sm" role="button">Logout</a>
+        </div>
+        <div class="row mt-5"></div>  
+        <div class="row mt-5 justify-content-center">
+            <h1>All Injuries</h1>
+        </div>
+        <div class="row mt-5">
+            <div class="col">
+                <div class="form-group">
+                    <table class="table table-bordered table-md text-center table-hover">
+                        <thead> 
+                            <tr>
+                                <th scope="col">Athlete</th> 
+                                <th scope="col">Belt Rank</th>
+                                <th scope="col">Injury Date</th>   
+                                <th scope="col">Body Part</th>
+                                <th scope="col">Injury Type</th>
+                                <th scope="col">Pain Level</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for injury in all_injuries %} 
+                            <tr>
+                                <td>{{ injury.athlete.first_name }} {{ injury.athlete.last_name }}</td>
+                                <td>{{ injury.athlete.belt_rank }}</td>   
+                                <td>{{ injury.created_at }}</td>              
+                                <td>{{ injury.injury_location }}</td>
+                                <td>{{ injury.injury_type }}</td>
+                                <td>{{ injury.pain_level }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div> 
+                {% with messages = get_flashed_messages(with_categories=True) %}
+                        {% if messages %}
+                            {% for message in messages %}
+                            {% if message[0] == "log_error" %}
+                            <p>{{message[1]}}</p>
+                            {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                {% endwith %}
+            </div>
+        </div>
+        <div class="row mt-5 justify-content-center">
+            <div class="btn-toolbar" role="toolbar" aria-label="Injury Tracker Pages">
+                <div class="btn-group mr-2" role="group" aria-label="My Dashboard">
+                    <a href="home" button type="button" class="btn btn-primary">My Dashboard</a>
+                </div>
+                <div class="btn-group mr-2" role="group" aria-label="Photolog">
+                    <a href="photolog" button type="button" class="btn btn-primary">Injury Gallery</a>
+                </div>
+            </div>
+        </div>
+    </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  </body>
+  </html>

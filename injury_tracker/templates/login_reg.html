@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+<title>Injury Tracker</title>
+</head>
+<body>
+  <div class="container">
+    <div class="row mt-5 justify-content-center">
+        <h1>Jiu Jitsu Injury Tracker</h1>
+    </div>
+    <div class="row mt-5">
+      <div class="col">
+        <form action="/register", method="POST" class="justify-content-center">
+          <div class="form-group border p-2">
+            <h3 class="text-center mt-2">New Athlete</h3>
+            <div class="form-group">
+              <label for="firstname">First Name:</label>
+              <input type="text" class="form-control" name="first_name">
+            </div>
+            <div class="form-group">
+              <label for="lastname">Last Name:</label>
+              <input type="text" class="form-control" name="last_name">
+            </div>
+            <div class="form-group">
+                <label for="beltrank">Belt Rank:</label>
+                <select class="form-control" name="belt_rank">
+                    <option>White</option>
+                    <option>Blue</option>
+                    <option>Purple</option>
+                    <option>Brown</option>
+                    <option>Black</option>
+                    <option>Red</option>
+                </select>
+            </div>
+            <div class="form-group">
+              <label for="email">Email:</label>
+              <input type="email" class="form-control" name="email">
+            </div>
+            <div class="form-group">
+              <label for="password">Password:</label>
+              <input type="password" class="form-control" name="password">
+            </div>
+            <div class="form-group">
+              <label for="cpassword">Confirm Password:</label>
+              <input type="password" class="form-control" name="cpassword">
+            </div>
+            <div class="d-flex text-center justify-content-center mt-4 mb-5">
+              <button type="submit" class="btn btn-dark text-white">Register</button>
+            </div>
+            {% with messages = get_flashed_messages(with_categories=True) %}
+                  {% if messages %}
+                      {% for message in messages %}
+                        {% if message[0] == "reg_error" %}
+                      <p>{{message[1]}}</p>
+                        {% endif %}
+                      {% endfor %}
+                  {% endif %}
+              {% endwith %}
+          </div>
+        </form>
+      </div>
+      <div class="col">
+        <form action="/login", method="POST" class="justify-content-center">
+          <div class="form-group border p-2">
+            <h3 class="text-center mt-2">Login</h3>
+            <div class="form-group">
+              <label for="email">Email:</label>
+              <input type="email" class="form-control" name="lemail">
+            </div>
+            <div class="form-group">
+              <label for="password">Password:</label>
+              <input type="password" class="form-control" name="lpassword">
+            </div>
+            <div class="d-flex text-center justify-content-center mt-4 mb-5">
+              <button type="submit" class="btn btn-dark text-white">Login</button>
+            </div>
+            {% with messages = get_flashed_messages(with_categories=True) %}
+                  {% if messages %}
+                      {% for message in messages %}
+                        {% if message[0] == "log_error" %}
+                      <p>{{message[1]}}</p>
+                        {% endif %}
+                      {% endfor %}
+                  {% endif %}
+              {% endwith %}
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</body>
+</html>
